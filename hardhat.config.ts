@@ -4,7 +4,7 @@ import {config as evn_config} from "dotenv";
 evn_config();
 
 
-const { PRIVATE_KEY, RPC_URL } = process.env;
+const { PRIVATE_KEY, PRIVATE_KEY_TEST, RPC_URL } = process.env;
 
 
 const config: HardhatUserConfig = {
@@ -20,7 +20,7 @@ const config: HardhatUserConfig = {
     mumbai: {
       url: "https://polygon-mumbai.g.alchemy.com/v2/bGRq4Ou6YB_plvpRZFDQsWW1MWukDWy6",
       accounts: [
-        "5393eb89457505dc0cea935ef8f3e09b03ecc283234fff38fdf6c8a8d0ccf35a",
+        PRIVATE_KEY_TEST!,
       ],
     },
   }
