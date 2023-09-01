@@ -1,30 +1,29 @@
-import { ethers } from 'ethers';
+import { parseEther } from 'ethers';
+import { ethers } from 'hardhat';
 
-const providerUrl = 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY';
-const provider = new ethers.providers.JsonRpcProvider(providerUrl);
-
-const mnemonic = 'YOUR_MNEMONIC';
-
-// You can derive a wallet from a specific index from the mnemonic. The default is index 0.
-const walletMnemonic = ethers.Wallet.fromMnemonic(mnemonic).connect(provider);
-
-// Contract details
 const contractAddress = 'CONTRACT_ADDRESS';
-const abi = [];
+const abi = [
+    "function withdraw(uint256 _amount) public",
+];
 
-// Create a contract instance
-const myContract = new ethers.Contract(contractAddress, abi, provider).connect(walletMnemonic);
+const fromAddress = "0xdeadbeef00000000";
+const toAddress = "0xcafebabe00000000";
+const amount = "100";
+
+
+const signerFromPK = new ethers.Wallet("PivateKey", ethers.provider);
+const signerFromPhrase = ethers.Wallet.fromPhrase("seed_phrase", ethers.provider);
+
+
+const contract = new ethers.Contract(contractAddress, abi);
 
 const executeTransfer = async () => {
     try {
-        const tx = await myContract.YOUR_METHOD_NAME(/* Parameters if any */, {
-            value: ethers.utils.parseEther('AMOUNT_IN_ETH'),
-            gasLimit: 200000 // This is just an example. Ideally, you'd estimate the gas.
-        });
+        const transaction = await contract.transfer(toAddress, parseEther(amount));
 
-        console.log('Transaction hash:', tx.hash);
+        console.log('Transaction hash:', transaction.hash);
 
-        await tx.wait();
+        await transaction.wait();
 
         console.log('Transaction has been confirmed!');
     } catch (error) {

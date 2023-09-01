@@ -4,9 +4,8 @@ const providerUrl = 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY';
 
 const mnemonic = 'YOUR_MNEMONIC';
 
-const wallet = new ethers.Wallet(mnemonic);
-
-const signer = ethers.Wallet.fromPhrase(mnemonic, ethers.provider);
+// const wallet = new ethers.Wallet(mnemonic);
+const wallet = ethers.Wallet.fromPhrase(mnemonic);
 
 const recipientAddress = 'RECIPIENT_ADDRESS';
 const amountInEth = 'AMOUNT_IN_ETH'; 
