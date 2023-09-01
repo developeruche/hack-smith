@@ -6,7 +6,6 @@ const abi = [
     "function withdraw(uint256 _amount) public",
 ];
 
-const fromAddress = "0xdeadbeef00000000";
 const toAddress = "0xcafebabe00000000";
 const amount = "100";
 
